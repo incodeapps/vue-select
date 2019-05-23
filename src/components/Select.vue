@@ -92,6 +92,19 @@
        * @type {Object||String||null}
        */
       value: {},
+  
+      /**
+       * Equivalent to the `placeholder` attribute on an `<input>`.
+       * @type {String}
+       */
+      name: {
+        type: String,
+        default() {
+          
+          return this._uid
+          
+        }
+      },
 
       /**
        * An object with any custom components that you'd like to overwrite
@@ -180,6 +193,15 @@
       clearSearchOnSelect: {
         type: Boolean,
         default: true
+      },
+  
+      /**
+       * Selects the top value found when the search stops being in focus. Helps when allowing auto-completion.
+       * @type {Boolean}
+       */
+      selectOnSearchBlur: {
+        type: Boolean,
+        default: false
       },
 
       /**
@@ -721,6 +743,9 @@
        * @return {void}
        */
       onSearchBlur() {
+        if (this.selectOnSearchBlur) {
+          this.typeAheadSelect()
+        }
         if (this.mousedown && !this.searching) {
           this.mousedown = false
         } else {
@@ -869,6 +894,7 @@
         return {
           search: {
             attributes: {
+              'name': this.name,
               'disabled': this.disabled,
               'placeholder': this.searchPlaceholder,
               'tabindex': this.tabindex,
@@ -879,7 +905,7 @@
               'ref': 'search',
               'role': 'combobox',
               'type': 'search',
-              'autocomplete': 'off',
+              'autocomplete': this.autocomplete,
               'value': this.search,
             },
             events: {

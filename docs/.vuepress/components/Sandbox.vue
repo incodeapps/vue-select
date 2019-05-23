@@ -46,6 +46,14 @@
           <code>:filterable="{{ configuration.searchable ? 'true' : 'false' }}"</code>
         </label>
       </div>
+  
+      <div class="list-item">
+        <label for="autocomplete">
+          <code>:autocomplete="{{ configuration.autocomplete || (configuration.autocomplete === '') ? '' : 'off' }}"</code>
+        </label>
+        <br />
+        <input id="autocomplete" type="text" v-model="configuration.autocomplete">
+      </div>
 
       <h5 class="list-item">Tagging</h5>
 
@@ -83,6 +91,13 @@
         <label for="closeOnSelect">
           <input id="closeOnSelect" type="checkbox" v-model="configuration.closeOnSelect">
           <code>:close-on-select="{{ configuration.closeOnSelect ? 'true' : 'false' }}"</code>
+        </label>
+      </div>
+
+      <div class="list-item">
+        <label for="selectOnSearchBlur">
+          <input id="selectOnSearchBlur" type="checkbox" v-model="configuration.selectOnSearchBlur">
+          <code>:select-on-search-blur="{{ configuration.selectOnSearchBlur ? 'true' : 'false' }}"</code>
         </label>
       </div>
 
