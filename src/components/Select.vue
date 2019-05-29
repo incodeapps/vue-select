@@ -100,9 +100,7 @@
       name: {
         type: String,
         default() {
-          
-          return this._uid
-          
+          return 'vs__search' + this._uid
         }
       },
 
@@ -743,7 +741,8 @@
        * @return {void}
        */
       onSearchBlur() {
-        if (this.selectOnSearchBlur) {
+        console.log(this.filteredOptions.length);
+        if (this.selectOnSearchBlur && this.filteredOptions.length === 1) {
           this.typeAheadSelect()
         }
         if (this.mousedown && !this.searching) {

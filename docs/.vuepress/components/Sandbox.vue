@@ -192,6 +192,7 @@ const defaultConfig = () => ({
   filterable: true,
   noDrop: false,
   closeOnSelect: true,
+  selectOnSearchBlur: false,
   disabled: false,
   selectOntab: false,
   placeholder: 'Select a Country...',
