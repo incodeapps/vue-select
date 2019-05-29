@@ -93,6 +93,13 @@
           <code>:close-on-select="{{ configuration.closeOnSelect ? 'true' : 'false' }}"</code>
         </label>
       </div>
+  
+      <div class="list-item">
+        <label for="clearSearchOnSelect">
+          <input id="clearSearchOnSelect" type="checkbox" v-model="configuration.clearSearchOnSelect">
+          <code>:clear-search-on-select="{{ configuration.clearSearchOnSelect ? 'true' : 'false' }}"</code>
+        </label>
+      </div>
 
       <div class="list-item">
         <label for="selectOnSearchBlur">
@@ -192,6 +199,7 @@ const defaultConfig = () => ({
   filterable: true,
   noDrop: false,
   closeOnSelect: true,
+  clearSearchOnSelect: true,
   selectOnSearchBlur: false,
   disabled: false,
   selectOntab: false,

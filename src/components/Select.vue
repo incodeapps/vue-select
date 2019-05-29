@@ -507,7 +507,6 @@
           }
           this.updateValue(option);
         }
-
         this.onAfterSelect(option)
       },
 
@@ -536,6 +535,9 @@
        * @return {void}
        */
       onAfterSelect(option) {
+  
+        console.log('[vue-select onAfterSelect]\n this.$data._value', this.$data._value);
+        
         if (this.closeOnSelect) {
           this.open = !this.open
           this.searchEl.blur()
@@ -543,9 +545,8 @@
 
         if (this.clearSearchOnSelect) {
           this.search = ''
-        } else {
-        	console.log('[vue-select onAfterSelect]\n this.search:', this.search, '\n this.value', this.value);
-				}
+        }
+				
       },
 
       /**
@@ -571,6 +572,10 @@
         }
 
         this.$emit('input', value);
+        this.$emit('change', value);
+        
+        console.log('[updateValue]\n $emit(input)', value);
+  
       },
 
       /**
@@ -743,10 +748,10 @@
        * @return {void}
        */
       onSearchBlur() {
-        console.log(this.filteredOptions.length);
+        console.log('[onSearchBlur]');
         if (this.selectOnSearchBlur && this.filteredOptions.length === 1) {
+          console.log('[onSearchBlur] typeAheadSelect()');
           this.typeAheadSelect();
-	        this.searchEl.blur();
         }
         if (this.mousedown && !this.searching) {
           this.mousedown = false
