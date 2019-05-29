@@ -543,7 +543,9 @@
 
         if (this.clearSearchOnSelect) {
           this.search = ''
-        }
+        } else {
+        	console.log('[vue-select onAfterSelect]\n this.search:', this.search, '\n this.value', this.value);
+				}
       },
 
       /**
