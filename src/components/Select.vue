@@ -505,6 +505,11 @@
           if (this.multiple) {
             option = this.selectedValue.concat(option)
           }
+          
+          if (!this.optionExists(option)) {
+            console.debug('NOT EXIST')
+          }
+          
           this.updateValue(option);
         }
         this.onAfterSelect(option)
@@ -527,6 +532,7 @@
        */
       clearSelection() {
         this.updateValue(this.multiple ? [] : null)
+        this.search = ''
       },
 
       /**
@@ -536,7 +542,7 @@
        */
       onAfterSelect(option) {
   
-        console.log('[vue-select onAfterSelect]\n this.$data._value', this.$data._value);
+        console.log('[vue-select onAfterSelect]\n option', option.text, '\n this.$data._value', this.$data._value.text, '\nthis.selectedValue', this.selectedValue.text, '\n\n', this);
         
         if (this.closeOnSelect) {
           this.open = !this.open
@@ -572,7 +578,6 @@
         }
 
         this.$emit('input', value);
-        this.$emit('change', value);
         
         console.log('[updateValue]\n $emit(input)', value);
   
@@ -748,9 +753,7 @@
        * @return {void}
        */
       onSearchBlur() {
-        console.log('[onSearchBlur]');
         if (this.selectOnSearchBlur && this.filteredOptions.length === 1) {
-          console.log('[onSearchBlur] typeAheadSelect()');
           this.typeAheadSelect();
         }
         if (this.mousedown && !this.searching) {
@@ -1018,9 +1021,9 @@
           return optionList;
         }
 
-        let options = this.search.length ? this.filter(optionList, this.search, this) : optionList;
-        if (this.taggable && this.search.length && !this.optionExists(this.search)) {
-          options.unshift(this.search)
+        let options = this.search.length ? this.filter(optionList, this.search.trim(), this) : optionList;
+        if (this.taggable && this.search.length && !this.optionExists(this.search.trim())) {
+          options.unshift(this.search.trim())
         }
         return options
       },
