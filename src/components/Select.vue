@@ -745,7 +745,8 @@
       onSearchBlur() {
         console.log(this.filteredOptions.length);
         if (this.selectOnSearchBlur && this.filteredOptions.length === 1) {
-          this.typeAheadSelect()
+          this.typeAheadSelect();
+	        this.searchEl.blur();
         }
         if (this.mousedown && !this.searching) {
           this.mousedown = false
