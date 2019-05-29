@@ -551,6 +551,7 @@
 
         if (this.clearSearchOnSelect) {
           this.search = ''
+          this.searchEl.blur()
         }
 				
       },
@@ -578,9 +579,8 @@
         }
 
         this.$emit('input', value);
+        this.$emit('change', value);
         
-        console.log('[updateValue]\n $emit(input)', value);
-  
       },
 
       /**
